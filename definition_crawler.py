@@ -15,6 +15,8 @@ def get_cambridge_definition(word):
         soup = BeautifulSoup(response.content, 'html.parser')
         # Extract the definition from the HTML
         definition = soup.find("div", {"class": "def ddef_d db"})
+        pos = soup.find("div", {"class": "posgram dpos-g hdib lmr-5"})
+        print(pos)
         # Check if a definition was found
         if definition:
             # Join text within the div tag with spaces between words
@@ -23,8 +25,8 @@ def get_cambridge_definition(word):
         else:
             return f"No definition found for {word}"
 
-    else:
-        return f"Failed to retrieve data. Status code: {response.status_code}"
+    # else:
+    #     return f"Failed to retrieve data. Status code: {response.status_code}"
         
 def store_definition(word, definition, filename="vocabulary.txt"):
     with open(filename, 'a') as file:
@@ -42,8 +44,8 @@ def sort_and_save(filename="vocabulary.txt"):
 if __name__ == "__main__":
     word_to_search = "nostalgia"
     definition = get_cambridge_definition(word_to_search)
-    print(f"Definition of '{word_to_search}': {definition}")
+    print(f"Definition of '{word_to_search}':\n {definition}")
             
-    store_definition(word_to_search, definition)
+    # store_definition(word_to_search, definition)
     
-    sort_and_save()
+    # sort_and_save()
